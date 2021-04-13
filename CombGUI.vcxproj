@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Icons\Tintin.ico" />
+    <Image Include="Icons\Tintin_dark.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

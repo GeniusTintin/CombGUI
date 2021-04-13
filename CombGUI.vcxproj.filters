@@ -46,5 +46,8 @@
     <Image Include="Icons\Tintin.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Icons\Tintin_dark.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -38,6 +38,8 @@ namespace CombGUI {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::TextBox^ textBox4;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
 	private: System::Windows::Forms::Button^ button5;
 	public:
 		
@@ -101,6 +103,8 @@ namespace CombGUI {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button1
@@ -205,6 +209,8 @@ namespace CombGUI {
 			// 
 			// textBox3
 			// 
+			this->textBox3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox3->Location = System::Drawing::Point(124, 132);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(100, 20);
@@ -253,6 +259,7 @@ namespace CombGUI {
 			// 
 			// button4
 			// 
+			this->button4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->button4->Location = System::Drawing::Point(230, 132);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(20, 20);
@@ -272,6 +279,8 @@ namespace CombGUI {
 			// 
 			// textBox4
 			// 
+			this->textBox4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox4->Location = System::Drawing::Point(124, 164);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(100, 20);
@@ -280,6 +289,7 @@ namespace CombGUI {
 			// 
 			// button5
 			// 
+			this->button5->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->button5->Location = System::Drawing::Point(230, 164);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(20, 20);
@@ -288,11 +298,23 @@ namespace CombGUI {
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &combGUI::button5_Click);
 			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
+			this->pictureBox1->Location = System::Drawing::Point(352, 126);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(60, 60);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox1->TabIndex = 18;
+			this->pictureBox1->TabStop = false;
+			// 
 			// combGUI
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(447, 320);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->textBox4);
 			this->Controls->Add(this->label5);
@@ -314,6 +336,7 @@ namespace CombGUI {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"combGUI";
 			this->Text = L"CombGUI";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -374,6 +397,7 @@ private:
 	System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 		textBox4->Text = "";
 	}
+
 };
 }
 // Dingran Yuan
