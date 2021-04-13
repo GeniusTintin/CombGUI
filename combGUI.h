@@ -30,6 +30,10 @@ namespace CombGUI {
 		double basefreq;
 		int32_t filtering_method;
 		std::string* pathPtr;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button4;
+	public:
 		std::string* filenamePtr;
 
 	protected:
@@ -85,6 +89,9 @@ namespace CombGUI {
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -94,7 +101,7 @@ namespace CombGUI {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->button1->Location = System::Drawing::Point(43, 259);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(292, 28);
+			this->button1->Size = System::Drawing::Size(380, 28);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Start";
 			this->button1->UseVisualStyleBackColor = true;
@@ -107,7 +114,7 @@ namespace CombGUI {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox1->Location = System::Drawing::Point(124, 32);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(211, 20);
+			this->textBox1->Size = System::Drawing::Size(259, 20);
 			this->textBox1->TabIndex = 1;
 			this->textBox1->Text = L"square_generated.txt";
 			// 
@@ -136,20 +143,21 @@ namespace CombGUI {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox2->Location = System::Drawing::Point(124, 65);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(211, 20);
+			this->textBox2->Size = System::Drawing::Size(259, 20);
 			this->textBox2->TabIndex = 4;
 			this->textBox2->Text = L"D:\\Home\\MyProjects\\VisualStudio\\repos\\CombGUI\\";
 			// 
 			// checkBox1
 			// 
 			this->checkBox1->AutoSize = true;
+			this->checkBox1->Checked = true;
+			this->checkBox1->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox1->Location = System::Drawing::Point(124, 91);
 			this->checkBox1->Name = L"checkBox1";
 			this->checkBox1->Size = System::Drawing::Size(85, 17);
 			this->checkBox1->TabIndex = 5;
 			this->checkBox1->Text = L"Default Path";
 			this->checkBox1->UseVisualStyleBackColor = true;
-			this->checkBox1->Checked = true;
 			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &combGUI::checkBox1_CheckedChanged);
 			// 
 			// radioButton1
@@ -177,6 +185,7 @@ namespace CombGUI {
 			// radioButton3
 			// 
 			this->radioButton3->AutoSize = true;
+			this->radioButton3->Checked = true;
 			this->radioButton3->Location = System::Drawing::Point(124, 212);
 			this->radioButton3->Name = L"radioButton3";
 			this->radioButton3->Size = System::Drawing::Size(98, 17);
@@ -184,7 +193,6 @@ namespace CombGUI {
 			this->radioButton3->TabStop = true;
 			this->radioButton3->Text = L"Improved comb";
 			this->radioButton3->UseVisualStyleBackColor = true;
-			this->radioButton3->Checked = true;
 			// 
 			// textBox3
 			// 
@@ -212,11 +220,50 @@ namespace CombGUI {
 			this->label4->TabIndex = 11;
 			this->label4->Text = L"Filtering Method";
 			// 
+			// button2
+			// 
+			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->button2->Location = System::Drawing::Point(389, 32);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(27, 20);
+			this->button2->TabIndex = 12;
+			this->button2->Text = L"X";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &combGUI::button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->button3->Location = System::Drawing::Point(389, 65);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(27, 20);
+			this->button3->TabIndex = 13;
+			this->button3->Text = L"X";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &combGUI::button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
+			this->button4->Location = System::Drawing::Point(230, 132);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(27, 20);
+			this->button4->TabIndex = 14;
+			this->button4->Text = L"X";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &combGUI::button4_Click);
+			// 
 			// combGUI
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(379, 299);
+			this->ClientSize = System::Drawing::Size(467, 299);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button2);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->textBox3);
@@ -239,8 +286,6 @@ namespace CombGUI {
 #pragma endregion
 	
 private: 
-	
-private: 
 	System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		if (checkBox1->Checked) {
 			textBox2->Text = "D:\\Home\\MyProjects\\VisualStudio\\repos\\CombGUI\\";
@@ -249,34 +294,47 @@ private:
 			textBox2->Text = "";
 		}
 	}
+ 
+	System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		//CombGUI::UserSize userform;
+		//System::Windows::Forms::Application::Run(% userform);
+		//userform.Show();
+		static std::string path = msclr::interop::marshal_as<std::string>(this->textBox2->Text);
+		static std::string filename = msclr::interop::marshal_as<std::string>(this->textBox1->Text);
+		pathPtr = &path;
+		filenamePtr = &filename;
 
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	//CombGUI::UserSize userform;
-	//System::Windows::Forms::Application::Run(% userform);
-	//userform.Show();
-	static std::string path = msclr::interop::marshal_as<std::string>(this->textBox2->Text);
-	static std::string filename = msclr::interop::marshal_as<std::string>(this->textBox1->Text);
-	pathPtr = &path;
-	filenamePtr = &filename;
+		//extern FileReader::fileReader eventReader;
 
-	//extern FileReader::fileReader eventReader;
-
-	basefreq = Convert::ToDouble(this->textBox3->Text);
+		basefreq = Convert::ToDouble(this->textBox3->Text);
 	
-	if (this->radioButton1->Checked) {
-		filtering_method = 1;
-	}
-	else if(this->radioButton2->Checked){
-		filtering_method = 2;
-	}
-	else {
-		filtering_method = 3;
+		if (this->radioButton1->Checked) {
+			filtering_method = 1;
+		}
+		else if(this->radioButton2->Checked){
+			filtering_method = 2;
+		}
+		else {
+			filtering_method = 3;
+		}
+
+		//eventReader.setParameter(path, filename);
+
+		this->Close();
 	}
 
-	//eventReader.setParameter(path, filename);
+	System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 
-	this->Close();
-}
+		textBox1->Text = "";
+	}
+
+	System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		textBox2->Text = "";
+	}
+
+	System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+		textBox3->Text = "";
+	}
 };
 }
 // Dingran Yuan
