@@ -16,7 +16,7 @@ namespace CombFilter {
 	class combFilter {
 	public:
 
-		combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method);
+		combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, int32_t publish_framerate);
 		virtual ~combFilter();
 		void eventsCallback();
 

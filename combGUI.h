@@ -29,12 +29,18 @@ namespace CombGUI {
 		
 		double basefreq;
 		int32_t filtering_method;
+		int32_t publish_framerate;
 		std::string* pathPtr;
+		std::string* filenamePtr;
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::TextBox^ textBox4;
+	private: System::Windows::Forms::Button^ button5;
 	public:
-		std::string* filenamePtr;
+		
 
 	protected:
 		/// <summary>
@@ -92,6 +98,9 @@ namespace CombGUI {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -99,9 +108,9 @@ namespace CombGUI {
 			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button1->Location = System::Drawing::Point(43, 259);
+			this->button1->Location = System::Drawing::Point(30, 284);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(380, 28);
+			this->button1->Size = System::Drawing::Size(391, 24);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Start";
 			this->button1->UseVisualStyleBackColor = true;
@@ -114,14 +123,14 @@ namespace CombGUI {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox1->Location = System::Drawing::Point(124, 32);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(259, 20);
+			this->textBox1->Size = System::Drawing::Size(264, 20);
 			this->textBox1->TabIndex = 1;
 			this->textBox1->Text = L"square_generated.txt";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(40, 32);
+			this->label1->Location = System::Drawing::Point(64, 32);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(54, 13);
 			this->label1->TabIndex = 2;
@@ -130,7 +139,7 @@ namespace CombGUI {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(40, 68);
+			this->label2->Location = System::Drawing::Point(64, 68);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(48, 13);
 			this->label2->TabIndex = 3;
@@ -143,7 +152,7 @@ namespace CombGUI {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox2->Location = System::Drawing::Point(124, 65);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(259, 20);
+			this->textBox2->Size = System::Drawing::Size(264, 20);
 			this->textBox2->TabIndex = 4;
 			this->textBox2->Text = L"D:\\Home\\MyProjects\\VisualStudio\\repos\\CombGUI\\";
 			// 
@@ -163,7 +172,7 @@ namespace CombGUI {
 			// radioButton1
 			// 
 			this->radioButton1->AutoSize = true;
-			this->radioButton1->Location = System::Drawing::Point(124, 166);
+			this->radioButton1->Location = System::Drawing::Point(124, 205);
 			this->radioButton1->Name = L"radioButton1";
 			this->radioButton1->Size = System::Drawing::Size(105, 17);
 			this->radioButton1->TabIndex = 6;
@@ -174,7 +183,7 @@ namespace CombGUI {
 			// radioButton2
 			// 
 			this->radioButton2->AutoSize = true;
-			this->radioButton2->Location = System::Drawing::Point(124, 189);
+			this->radioButton2->Location = System::Drawing::Point(124, 228);
 			this->radioButton2->Name = L"radioButton2";
 			this->radioButton2->Size = System::Drawing::Size(52, 17);
 			this->radioButton2->TabIndex = 7;
@@ -186,7 +195,7 @@ namespace CombGUI {
 			// 
 			this->radioButton3->AutoSize = true;
 			this->radioButton3->Checked = true;
-			this->radioButton3->Location = System::Drawing::Point(124, 212);
+			this->radioButton3->Location = System::Drawing::Point(124, 251);
 			this->radioButton3->Name = L"radioButton3";
 			this->radioButton3->Size = System::Drawing::Size(98, 17);
 			this->radioButton3->TabIndex = 8;
@@ -205,7 +214,7 @@ namespace CombGUI {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(40, 135);
+			this->label3->Location = System::Drawing::Point(27, 132);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(84, 13);
 			this->label3->TabIndex = 10;
@@ -214,7 +223,7 @@ namespace CombGUI {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(40, 168);
+			this->label4->Location = System::Drawing::Point(27, 205);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(82, 13);
 			this->label4->TabIndex = 11;
@@ -222,11 +231,10 @@ namespace CombGUI {
 			// 
 			// button2
 			// 
-			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->button2->Location = System::Drawing::Point(389, 32);
+			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->button2->Location = System::Drawing::Point(394, 32);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(27, 20);
+			this->button2->Size = System::Drawing::Size(20, 20);
 			this->button2->TabIndex = 12;
 			this->button2->Text = L"X";
 			this->button2->UseVisualStyleBackColor = true;
@@ -234,11 +242,10 @@ namespace CombGUI {
 			// 
 			// button3
 			// 
-			this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->button3->Location = System::Drawing::Point(389, 65);
+			this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->button3->Location = System::Drawing::Point(394, 65);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(27, 20);
+			this->button3->Size = System::Drawing::Size(20, 20);
 			this->button3->TabIndex = 13;
 			this->button3->Text = L"X";
 			this->button3->UseVisualStyleBackColor = true;
@@ -246,21 +253,49 @@ namespace CombGUI {
 			// 
 			// button4
 			// 
-			this->button4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left));
 			this->button4->Location = System::Drawing::Point(230, 132);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(27, 20);
+			this->button4->Size = System::Drawing::Size(20, 20);
 			this->button4->TabIndex = 14;
 			this->button4->Text = L"X";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &combGUI::button4_Click);
 			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(27, 168);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(91, 13);
+			this->label5->TabIndex = 15;
+			this->label5->Text = L"Publish Framerate";
+			// 
+			// textBox4
+			// 
+			this->textBox4->Location = System::Drawing::Point(124, 164);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->Size = System::Drawing::Size(100, 20);
+			this->textBox4->TabIndex = 16;
+			this->textBox4->Text = L"1000";
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(230, 164);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(20, 20);
+			this->button5->TabIndex = 17;
+			this->button5->Text = L"X";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &combGUI::button5_Click);
+			// 
 			// combGUI
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(467, 299);
+			this->ClientSize = System::Drawing::Size(447, 320);
+			this->Controls->Add(this->button5);
+			this->Controls->Add(this->textBox4);
+			this->Controls->Add(this->label5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
@@ -305,7 +340,7 @@ private:
 		filenamePtr = &filename;
 
 		//extern FileReader::fileReader eventReader;
-
+		publish_framerate = Convert::ToInt32(this->textBox4->Text);
 		basefreq = Convert::ToDouble(this->textBox3->Text);
 	
 		if (this->radioButton1->Checked) {
@@ -334,6 +369,10 @@ private:
 
 	System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 		textBox3->Text = "";
+	}
+
+	System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		textBox4->Text = "";
 	}
 };
 }
