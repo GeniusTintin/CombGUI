@@ -5,7 +5,7 @@
 
 namespace CombFilter {
 
-	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, int32_t publish_framerate) {
+	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate) {
 
 		static FileReader::fileReader eventReader(path, filename);
 		myReaderPtr_ = &eventReader;

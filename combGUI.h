@@ -27,9 +27,9 @@ namespace CombGUI {
 			//
 		}
 		
-		double basefreq;
 		int32_t filtering_method;
-		int32_t publish_framerate;
+		double basefreq;
+		double publish_framerate;
 		std::string* pathPtr;
 		std::string* filenamePtr;
 
@@ -340,7 +340,7 @@ private:
 		filenamePtr = &filename;
 
 		//extern FileReader::fileReader eventReader;
-		publish_framerate = Convert::ToInt32(this->textBox4->Text);
+		publish_framerate = Convert::ToDouble(this->textBox4->Text);
 		basefreq = Convert::ToDouble(this->textBox3->Text);
 	
 		if (this->radioButton1->Checked) {
