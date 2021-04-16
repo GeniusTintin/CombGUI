@@ -78,12 +78,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\opencv\sources\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\opencv\build\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>opencv_world451d.lib</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
+      <AdditionalLibraryDirectories>C:\Program Files\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -103,18 +104,24 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\opencv\build\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>opencv_world451d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\opencv\build\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>opencv_world451d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
