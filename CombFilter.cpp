@@ -5,13 +5,14 @@
 
 namespace CombFilter {
 
-	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate) {
+	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr) {
 
 		static FileReader::fileReader eventReader(path, filename);
 		myReaderPtr_ = &eventReader;
 		base_frequency_ = basefreq;
 		filtering_method_ = filtering_method;
 		publish_framerate_ = publish_framerate;
+		mtr_ = mtr;
 	}
 
 	combFilter::~combFilter() {
@@ -163,7 +164,7 @@ namespace CombFilter {
 	void combFilter::initialise_buffer(const uint32_t& rows, const uint32_t& columns) {
 
 		// minimum time resolution
-		mtr_ = 1e5; // NOTE: this should be 1e-5, but due to the accuracy of the floating point number we use positive index here!
+		//mtr_ = 1e5; // NOTE: this should be 1e-5, but due to the accuracy of the floating point number we use positive index here!
 		t_next_store_ = 0.0;
 		buffer_length_ = int(d12_ * mtr_ / myReaderPtr_->timeResolution_ + 1);
 		buffer_index_ = 0;
