@@ -74,7 +74,7 @@ namespace CombGUI {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(140, 20);
 			this->textBox1->TabIndex = 0;
-			this->textBox1->Text = L"60";
+			this->textBox1->Text = L"180";
 			// 
 			// textBox2
 			// 
@@ -85,7 +85,7 @@ namespace CombGUI {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(140, 20);
 			this->textBox2->TabIndex = 1;
-			this->textBox2->Text = L"60";
+			this->textBox2->Text = L"240";
 			// 
 			// label1
 			// 

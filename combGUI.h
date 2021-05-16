@@ -136,7 +136,7 @@ namespace CombGUI {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(264, 20);
 			this->textBox1->TabIndex = 1;
-			this->textBox1->Text = L"square_generated.txt";
+			this->textBox1->Text = L"events.txt";
 			// 
 			// label1
 			// 
@@ -165,7 +165,7 @@ namespace CombGUI {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(264, 20);
 			this->textBox2->TabIndex = 4;
-			this->textBox2->Text = L"D:\\Home\\MyProjects\\VisualStudio\\repos\\CombGUI\\";
+			this->textBox2->Text = L"C:\\Users\\Tintin\\OneDrive - Australian National University\\ENGN4200 Individual Project\\Dataset\\";
 			// 
 			// checkBox1
 			// 
