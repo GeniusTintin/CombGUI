@@ -15,8 +15,9 @@ void main(array<System::String^>^ args) {
 	int32_t filtering_method = form.filtering_method;
 	double basefreq = form.basefreq;
 	double publish_framerate = form.publish_framerate;
+	double mtr = form.mtr;
 
-	CombFilter::combFilter myFilter(path, filename, basefreq, filtering_method, publish_framerate);
+	CombFilter::combFilter myFilter(path, filename, basefreq, filtering_method, publish_framerate, mtr);
 
 	myFilter.eventsCallback();
 

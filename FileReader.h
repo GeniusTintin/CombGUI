@@ -5,6 +5,7 @@
 #include <fstream>
 
 namespace FileReader {
+
 	class fileReader {
 
 	public:

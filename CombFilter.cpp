@@ -5,13 +5,14 @@
 
 namespace CombFilter {
 
-	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate) {
+	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr) {
 
 		static FileReader::fileReader eventReader(path, filename);
 		myReaderPtr_ = &eventReader;
 		base_frequency_ = basefreq;
 		filtering_method_ = filtering_method;
 		publish_framerate_ = publish_framerate;
+		mtr_ = mtr;
 	}
 
 	combFilter::~combFilter() {
@@ -77,7 +78,7 @@ namespace CombFilter {
 						t_next_store_ = ts;
 					}
 
-					cv::Mat x0_e = cv::Mat::zeros(img_height_, img_width_, CV_64FC1);
+					cv::Mat x0_e = cv::Mat::zeros(img_height_, img_width_, COMB_FTYPE);
 					exp_of_log(x0_e);
 
 					grab_delay(x_d1_, int(d1_), 1);
@@ -116,7 +117,7 @@ namespace CombFilter {
 
 				}
 				// integral tracking
-				integral_tracking(x, y, polarity);
+				integral_tracking(x, y, ts, polarity, filtering_method_);
 			}
 		}
 	}
@@ -131,16 +132,18 @@ namespace CombFilter {
 		contrast_threshold_off_user_defined_ = -0.1;
 
 		// delayed version of integrated events
-		x0_ = cv::Mat::zeros(rows, columns, CV_64FC1);
-		x_d1_ = cv::Mat::zeros(rows, columns, CV_64FC1);
-		x_d2_ = cv::Mat::zeros(rows, columns, CV_64FC1);
-		x_d12_ = cv::Mat::zeros(rows, columns, CV_64FC1);
+		x0_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
+		x_d1_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
+		x_d2_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
+		x_d12_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
 
 		// delayed version of output
-		y0_ = cv::Mat::zeros(rows, columns, CV_64FC1);
-		y_d1_ = cv::Mat::zeros(rows, columns, CV_64FC1);
-		y_d2_ = cv::Mat::zeros(rows, columns, CV_64FC1);
-		y_d12_ = cv::Mat::zeros(rows, columns, CV_64FC1);
+		y0_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
+		y_d1_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
+		y_d2_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
+		y_d12_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
+
+		ts_ = cv::Mat::zeros(rows, columns, COMB_FTYPE);
 
 		d1_ = 1 * myReaderPtr_->timeResolution_ / base_frequency_;
 		d2_ = d1_ / 10;
@@ -163,7 +166,7 @@ namespace CombFilter {
 	void combFilter::initialise_buffer(const uint32_t& rows, const uint32_t& columns) {
 
 		// minimum time resolution
-		mtr_ = 1e5; // NOTE: this should be 1e-5, but due to the accuracy of the floating point number we use positive index here!
+		//mtr_ = 1e5; // NOTE: this should be 1e-5, but due to the accuracy of the floating point number we use positive index here!
 		t_next_store_ = 0.0;
 		buffer_length_ = int(d12_ * mtr_ / myReaderPtr_->timeResolution_ + 1);
 		buffer_index_ = 0;
@@ -183,19 +186,29 @@ namespace CombFilter {
 		// zero initialisation for all buffers
 		for (int i = 0; i < buffer_length_; i++) {
 
-			cv::Mat temp = cv::Mat::zeros(rows, columns, CV_64FC1);
+			cv::Mat temp = cv::Mat::zeros(rows, columns, COMB_FTYPE);
 			temp.copyTo(ring_buffer1_[i]);
 			temp.copyTo(ring_buffer2_[i]);
 		}
 	}
 
-	void combFilter::integral_tracking(const int x, const int y, const bool polarity) {
+	void combFilter::integral_tracking(const int x, const int y, double ts, const bool polarity, const int filtering_method) {
 
 		double c_times_p;
 
 		c_times_p = (polarity) ? contrast_threshold_on_user_defined_ : contrast_threshold_off_user_defined_;
 
-		x0_.at<double>(y, x) = x0_.at<double>(y, x) + c_times_p;
+		ts = ts / myReaderPtr_->timeResolution_;
+
+		if (filtering_method == 1 && filtering_method == 2) {
+			x0_.at<double>(y, x) = x0_.at<double>(y, x) + c_times_p;
+		}
+		else {
+			x0_.at<double>(y, x) = x0_.at<double>(y, x) * exp(-(ts - ts_.at<double>(y, x)) * 5 * M_PI) + c_times_p;
+			ts_.at<double>(y, x) = ts;
+		}
+		
+
 	}
 
 	void combFilter::store2buffer(const cv::Mat& figx, const cv::Mat& figy) {

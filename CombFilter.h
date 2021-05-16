@@ -12,11 +12,13 @@
 #include <opencv2/core.hpp>
 #include <msclr/marshal_cppstd.h>
 
+#define COMB_FTYPE CV_64FC1
+
 namespace CombFilter {
 	class combFilter {
 	public:
 
-		combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate);
+		combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr);
 		virtual ~combFilter();
 		void eventsCallback();
 
@@ -24,7 +26,7 @@ namespace CombFilter {
 
 		void initialise_image_states(const uint32_t& rows, const uint32_t& columns);
 		void initialise_buffer(const uint32_t& rows, const uint32_t& columns);
-		void integral_tracking(const int x, const int y, const bool polarity);
+		void integral_tracking(const int x, const int y, const double ts, const bool polarity, int filtering_method);
 		void store2buffer(const cv::Mat& figx, const cv::Mat& figy);
 		void grab_delay(cv::Mat& sel, const int delay, const int which_buffer);
 		void exp_of_log(cv::Mat& converted_image);
@@ -49,16 +51,18 @@ namespace CombFilter {
 		std::string window_name_ = "My Image Window";
 
 		// delayed integrated events
-		cv::Mat x0_ = cv::Mat::zeros(1, 1, CV_64FC1);
-		cv::Mat x_d1_ = cv::Mat::zeros(1, 1, CV_64FC1);
-		cv::Mat x_d2_ = cv::Mat::zeros(1, 1, CV_64FC1);
-		cv::Mat x_d12_ = cv::Mat::zeros(1, 1, CV_64FC1);
+		cv::Mat x0_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
+		cv::Mat x_d1_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
+		cv::Mat x_d2_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
+		cv::Mat x_d12_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
 
 		// delayed output
-		cv::Mat y0_ = cv::Mat::zeros(1, 1, CV_64FC1);
-		cv::Mat y_d1_ = cv::Mat::zeros(1, 1, CV_64FC1);
-		cv::Mat y_d2_ = cv::Mat::zeros(1, 1, CV_64FC1);
-		cv::Mat y_d12_ = cv::Mat::zeros(1, 1, CV_64FC1);
+		cv::Mat y0_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
+		cv::Mat y_d1_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
+		cv::Mat y_d2_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
+		cv::Mat y_d12_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
+
+		cv::Mat ts_ = cv::Mat::zeros(1, 1, COMB_FTYPE);
 
 		// user defined size
 		bool user_defined_size_ = false;
@@ -73,7 +77,7 @@ namespace CombFilter {
 		double rho2_ = 0;
 
 		// minimul time resolution
-		double mtr_ = 1e5;
+		double mtr_ = 1e2;
 		double t_next_store_ = 0.0;
 
 		// publish parameters
