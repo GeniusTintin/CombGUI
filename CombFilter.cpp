@@ -257,7 +257,15 @@ namespace CombFilter {
 	void combFilter::publish_intensity_estimate() {
 
 		cv::Mat display_image;
-		y0_.convertTo(display_image, CV_8UC1, 255.0);
+		if (filtering_method_ == 2) {
+			y0_.copyTo(display_image);
+			display_image += 0.5;
+			display_image.convertTo(display_image, CV_8UC1, 255.0);
+		}
+		else {
+			y0_.convertTo(display_image, CV_8UC1, 255.0);
+		}
+		
 		cv::imshow(window_name_, display_image);
 		cv::waitKey(1);
 	}
