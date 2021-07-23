@@ -34,6 +34,10 @@ namespace CombFilter {
 		void write_log(std::string filename, std::string content);
 		void publish_intensity_estimate();
 
+		// flickering generator
+		void initialise_flickering_generator();
+		void flickering_generator(); // used for flickering generating
+
 		FileReader::fileReader* myReaderPtr_;
 
 		bool initialised_ = false;
@@ -92,6 +96,17 @@ namespace CombFilter {
 		// contrast threshold 
 		double contrast_threshold_on_user_defined_ = 0.1;
 		double contrast_threshold_off_user_defined_ = 0.1;
+
+
+		// for flickering generator
+		bool first_ts_ = 0;
+		bool skipped_ = 0; // whether to skip read of next line
+		bool current_ts_checked_ = 0;
+		int64_t current_ts_ = 0;
+		int flickering_polarity_ = 1; // the on and off of the generated flickering
+		int64_t flickering_frequency_ = 0;
+		bool first_flicker_ = true;
+
 	};
 
 } // CombFilter 

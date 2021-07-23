@@ -1,4 +1,4 @@
-#define _USE_MATH_DEFINES
+﻿#define _USE_MATH_DEFINES
 #include "CombFilter.h"
 #include <iostream>
 #include <cmath>
@@ -58,22 +58,54 @@ namespace CombFilter {
 			initialise_image_states(img_height_, img_width_);
 		}
 
+			int32_t x = -1; // set a marker that will trigger a flickering generator
+			int32_t y = -1;
+			int32_t ts = -1;
+			int8_t polarity = -1;
+
+
 		while (!iseof) {
 
-			myReaderPtr_->readOneLine(iseof);
+			// travel through all the possible x and y
 
-			// declear variable
-			uint32_t x = myReaderPtr_->eData_.x;
-			uint32_t y = myReaderPtr_->eData_.y;
+			
+			if (ts > current_ts_ + myReaderPtr_->timeResolution_/(flickering_frequency_*2)) {
+				skipped_ = 1;
+				if (first_ts_) {
+					current_ts_ = myReaderPtr_->eData_.ts;
+					first_ts_ = false;
+				}
+			}
+			else {
+				skipped_ = 0;
+			}
 
-			if (x >= 0 && x < img_width_ && y >= 0 && y < img_height_) {
+			if (!skipped_) {
+				myReaderPtr_->readOneLine(iseof);
 
-				uint64_t ts = myReaderPtr_->eData_.ts;
-				uint8_t polarity = myReaderPtr_->eData_.polarity;
+				// declear variable
+				x = myReaderPtr_->eData_.x;
+				y = myReaderPtr_->eData_.y;
+				ts = myReaderPtr_->eData_.ts;
+				polarity = myReaderPtr_->eData_.polarity;
+			}
+			
+			
 
+			if ((x >= 0 && x < img_width_ && y >= 0 && y < img_height_) || (x==-1 && y==-1)) {
+	
+				// if is the first ts, note that down to save it for later flickering genreator reference
+				// current_ts_ is the current flickering time stamp
+				// first_ts_ is the boolean type that suggest that if it's at the beginning of the event file
+				if (first_ts_) {
+					current_ts_ = ts;
+					first_ts_ = false;
+				}
+				
+				
 
 				// grab delay and calculate y0_
-				while (ts >= t_next_store_) {
+				while (current_ts_ >= t_next_store_) {
 					if (t_next_store_ == 0) {
 						t_next_store_ = ts;
 					}
@@ -109,7 +141,8 @@ namespace CombFilter {
 					t_next_store_ += myReaderPtr_->timeResolution_ / mtr_;
 
 
-					if (publish_framerate_ > 0 && ts >= t_next_publish_) {
+					// publish frame between generated flickers
+					if (publish_framerate_ > 0 && (ts >= t_next_publish_ || current_ts_ >= t_next_publish_)) {
 
 						publish_intensity_estimate();
 						t_next_publish_ = ts + myReaderPtr_->timeResolution_ / publish_framerate_;
@@ -117,7 +150,22 @@ namespace CombFilter {
 
 				}
 				// integral tracking
-				integral_tracking(x, y, ts, polarity, filtering_method_);
+				if (!skipped_) {
+					integral_tracking(x, y, ts, polarity, filtering_method_);
+				}
+				else{
+					flickering_generator();
+					current_ts_ += myReaderPtr_->timeResolution_ /(flickering_frequency_*2);
+				}
+				
+
+
+				// TODO:
+				// write generated events to file
+				// events 读一个写一个
+
+				
+
 			}
 		}
 	}
@@ -155,12 +203,13 @@ namespace CombFilter {
 
 		cv::namedWindow(window_name_, cv::WINDOW_NORMAL);
 
+		// TODO:
+		initialise_flickering_generator();
+
 		initialise_buffer(rows, columns);
 
 		initialised_ = true;
 
-		// FIXME:
-		//std::cout << "Initialised! " << std::endl;
 	}
 
 	void combFilter::initialise_buffer(const uint32_t& rows, const uint32_t& columns) {
@@ -283,6 +332,45 @@ namespace CombFilter {
 		std::ofstream file2write;
 		file2write.open(path, std::ios_base::app); // append instead of overwrite
 		file2write << content << std::endl;
+	}
+
+
+	// flickering generator
+
+	void combFilter::initialise_flickering_generator() {
+		// for flickering generator
+
+		first_ts_ = true;
+		skipped_ = false; // whether to skip read of next line
+		current_ts_checked_ = false;
+		current_ts_ = 0;
+		flickering_polarity_ = 1; // the on and off of the generated flickering
+		flickering_frequency_ = 100;
+		first_flicker_ = true;
+	}
+
+	void combFilter::flickering_generator() {
+
+		// generate flickering for all pixels
+		int multiplier = 0;
+		if (first_flicker_) {
+			multiplier = 1;
+			first_flicker_ = false;
+		}
+		else {
+			multiplier = 2;
+		}
+
+		for (int i = 0; i < img_height_/2; i++) {
+			for (int j = 0; j < img_width_/2; j++) {
+				// generated events for selected pixel
+				x0_.at<double>(i, j) += multiplier * flickering_polarity_ * contrast_threshold_on_user_defined_;
+				
+			}
+		}
+
+		// flip the polarity after each flickering
+		flickering_polarity_ = -flickering_polarity_; 
 	}
 }
 

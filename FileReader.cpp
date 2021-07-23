@@ -61,6 +61,7 @@ namespace FileReader {
             if (x == ' ') {
                 switch (i) {
                 case 0: {
+                    // ts was encoded in microsecond (timeResolution = 1e6)
                     eData_.ts = uint64_t(timeResolution_ * atof(word.c_str()));
                     break;
                 }
