@@ -25,6 +25,7 @@ void main(array<System::String^>^ args) {
 	bool flicker_gen = form.flickering_gen;
 	int32_t flicker_freq = form.flickering_freq;
 	int32_t side_len = form.side_length;
+	int32_t noise_range = form.noise_range;
 	std::string starting_point = *form.starting_point;
 
 	int32_t startx, starty;
@@ -38,6 +39,7 @@ void main(array<System::String^>^ args) {
 	flicker_profile.startx = startx;
 	flicker_profile.starty = starty;
 	flicker_profile.side_len = side_len;
+	flicker_profile.noise_range = noise_range;
 
 	CombFilter::combFilter myFilter(path, filename, basefreq, filtering_method, publish_framerate, mtr, flicker_profile);
 

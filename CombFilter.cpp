@@ -2,6 +2,7 @@
 #include "CombFilter.h"
 #include "combGUI.h"
 #include <iostream>
+#include <cstdlib>
 #include <cmath>
 
 namespace CombFilter {
@@ -21,6 +22,7 @@ namespace CombFilter {
 		startx_ = flicker_profile.startx;
 		starty_ = flicker_profile.starty;
 		side_len_ = flicker_profile.side_len;
+		noise_range_ = flicker_profile.noise_range;
 	}
 
 	combFilter::~combFilter() {
@@ -169,7 +171,7 @@ namespace CombFilter {
 				}
 				else{
 					flickering_generator();
-					current_ts_ += myReaderPtr_->timeResolution_ /(flickering_frequency_*2);
+					current_ts_ += myReaderPtr_->timeResolution_ /((flickering_frequency_ + rand() % (2*noise_range_) - noise_range_ )*2);
 				}
 				
 

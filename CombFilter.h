@@ -25,6 +25,7 @@ namespace CombFilter {
 			int32_t startx;
 			int32_t starty;
 			int32_t side_len;
+			int32_t noise_range;
 		};
 
 		combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr, flickerInfo flicker_profile);
@@ -120,6 +121,7 @@ namespace CombFilter {
 		int32_t startx_;
 		int32_t starty_;
 		int32_t side_len_;
+		int32_t noise_range_;
 
 	};
 

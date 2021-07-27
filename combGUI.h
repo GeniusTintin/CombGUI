@@ -38,6 +38,7 @@ namespace CombGUI {
 		int32_t flickering_freq;
 		std::string* starting_point;
 		int32_t side_length;
+		int32_t noise_range;
 
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button3;
@@ -56,6 +57,8 @@ namespace CombGUI {
 	private: System::Windows::Forms::TextBox^ textBox8;
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::Label^ label9;
+	private: System::Windows::Forms::Label^ label10;
+	private: System::Windows::Forms::TextBox^ textBox9;
 
 	private: System::Windows::Forms::Button^ button5;
 	public:
@@ -131,6 +134,8 @@ namespace CombGUI {
 			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -139,9 +144,9 @@ namespace CombGUI {
 			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button1->Location = System::Drawing::Point(30, 409);
+			this->button1->Location = System::Drawing::Point(30, 437);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(391, 28);
+			this->button1->Size = System::Drawing::Size(391, 30);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Start";
 			this->button1->UseVisualStyleBackColor = true;
@@ -185,8 +190,8 @@ namespace CombGUI {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(264, 20);
 			this->textBox2->TabIndex = 4;
-			this->textBox2->Text = L"C:\\Users\\Tintin\\OneDrive - Australian National University\\ANU_D\\ENGN4200 Individual Pro"
-				L"ject\\Dataset\\";
+			this->textBox2->Text = L"C:\\Users\\Tintin\\OneDrive - Australian National University\\ANU_D\\ENGN4200 Individu"
+				L"al Project\\Dataset\\";
 			// 
 			// checkBox1
 			// 
@@ -391,13 +396,13 @@ namespace CombGUI {
 			this->label7->AutoSize = true;
 			this->label7->Location = System::Drawing::Point(10, 354);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(102, 13);
+			this->label7->Size = System::Drawing::Size(105, 13);
 			this->label7->TabIndex = 25;
-			this->label7->Text = L"Flickering frequency";
+			this->label7->Text = L"Flickering Frequency";
 			// 
 			// textBox7
 			// 
-			this->textBox7->Location = System::Drawing::Point(352, 318);
+			this->textBox7->Location = System::Drawing::Point(349, 350);
 			this->textBox7->Name = L"textBox7";
 			this->textBox7->Size = System::Drawing::Size(69, 20);
 			this->textBox7->TabIndex = 26;
@@ -405,7 +410,7 @@ namespace CombGUI {
 			// 
 			// textBox8
 			// 
-			this->textBox8->Location = System::Drawing::Point(352, 354);
+			this->textBox8->Location = System::Drawing::Point(349, 386);
 			this->textBox8->Name = L"textBox8";
 			this->textBox8->Size = System::Drawing::Size(69, 20);
 			this->textBox8->TabIndex = 27;
@@ -414,27 +419,46 @@ namespace CombGUI {
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(279, 321);
+			this->label8->Location = System::Drawing::Point(276, 354);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(67, 13);
+			this->label8->Size = System::Drawing::Size(70, 13);
 			this->label8->TabIndex = 28;
-			this->label8->Text = L"starting point";
+			this->label8->Text = L"Starting Point";
 			// 
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(288, 357);
+			this->label9->Location = System::Drawing::Point(282, 389);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(58, 13);
+			this->label9->Size = System::Drawing::Size(64, 13);
 			this->label9->TabIndex = 29;
-			this->label9->Text = L"side length";
+			this->label9->Text = L"Side Length";
+			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(22, 389);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(87, 13);
+			this->label10->TabIndex = 30;
+			this->label10->Text = L"Noise Range (+-)";
+			// 
+			// textBox9
+			// 
+			this->textBox9->Location = System::Drawing::Point(122, 386);
+			this->textBox9->Name = L"textBox9";
+			this->textBox9->Size = System::Drawing::Size(100, 20);
+			this->textBox9->TabIndex = 31;
+			this->textBox9->Text = L"0";
 			// 
 			// combGUI
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::GradientActiveCaption;
-			this->ClientSize = System::Drawing::Size(447, 449);
+			this->ClientSize = System::Drawing::Size(447, 479);
+			this->Controls->Add(this->textBox9);
+			this->Controls->Add(this->label10);
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->textBox8);
@@ -487,15 +511,17 @@ private:
 	private: System::Void checkBox2_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		if (checkBox2->Checked) {
 			textBox6->Text = "100"; // flickering frequency
-			textBox7->Text = "0,0"; // strating point.
+			textBox7->Text = "0,0"; // starting point
 			textBox8->Text = "100"; // side length
+			textBox9->Text = "0";	// Noise range
 
 			flickering_gen = true;
 		}
 		else {
 			textBox6->Text = "0"; // flickering frequency
-			textBox7->Text = "0,0"; // strating point.
+			textBox7->Text = "0,0"; // starting point
 			textBox8->Text = "0"; // side length
+			textBox9->Text = "0"; // Noise range
 
 			flickering_gen = false;
 		}
@@ -519,6 +545,7 @@ private:
 		//parameters for flickering generator
 		flickering_freq = Convert::ToInt32(this->textBox6->Text); //int32_t
 		side_length = Convert::ToInt32(this->textBox8->Text); //int32_t
+		noise_range = Convert::ToInt32(this->textBox9->Text); //int32_t
 
 		starting_point = &starting_p;
 
