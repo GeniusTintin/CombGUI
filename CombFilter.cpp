@@ -1,11 +1,12 @@
 ﻿#define _USE_MATH_DEFINES
 #include "CombFilter.h"
+#include "combGUI.h"
 #include <iostream>
 #include <cmath>
 
 namespace CombFilter {
 
-	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr) {
+	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr, flickerInfo flicker_profile) {
 
 		static FileReader::fileReader eventReader(path, filename);
 		myReaderPtr_ = &eventReader;
@@ -13,6 +14,13 @@ namespace CombFilter {
 		filtering_method_ = filtering_method;
 		publish_framerate_ = publish_framerate;
 		mtr_ = mtr;
+
+		// flickering generator information
+		flicker_gen_ = flicker_profile.flicker_gen;
+		flickering_frequency_ = flicker_profile.flicker_freq;
+		startx_ = flicker_profile.startx;
+		starty_ = flicker_profile.starty;
+		side_len_ = flicker_profile.side_len;
 	}
 
 	combFilter::~combFilter() {
@@ -66,19 +74,25 @@ namespace CombFilter {
 
 		while (!iseof) {
 
-			// travel through all the possible x and y
+			// setup flickering generator information
 
-			
-			if (ts > current_ts_ + myReaderPtr_->timeResolution_/(flickering_frequency_*2)) {
-				skipped_ = 1;
-				if (first_ts_) {
-					current_ts_ = myReaderPtr_->eData_.ts;
-					first_ts_ = false;
+			if (flicker_gen_) {
+				if (ts > current_ts_ + myReaderPtr_->timeResolution_ / (flickering_frequency_ * 2)) {
+					skipped_ = 1;
+					if (first_ts_) {
+						current_ts_ = myReaderPtr_->eData_.ts;
+						first_ts_ = false;
+					}
+				}
+				else {
+					skipped_ = 0;
 				}
 			}
 			else {
 				skipped_ = 0;
 			}
+			
+			
 
 			if (!skipped_) {
 				myReaderPtr_->readOneLine(iseof);
@@ -91,13 +105,13 @@ namespace CombFilter {
 			}
 			
 			
-
+			// travel through all the possible x and y
 			if ((x >= 0 && x < img_width_ && y >= 0 && y < img_height_) || (x==-1 && y==-1)) {
 	
 				// if is the first ts, note that down to save it for later flickering genreator reference
 				// current_ts_ is the current flickering time stamp
 				// first_ts_ is the boolean type that suggest that if it's at the beginning of the event file
-				if (first_ts_) {
+				if (first_ts_ || !flicker_gen_) {
 					current_ts_ = ts;
 					first_ts_ = false;
 				}
@@ -345,7 +359,6 @@ namespace CombFilter {
 		current_ts_checked_ = false;
 		current_ts_ = 0;
 		flickering_polarity_ = 1; // the on and off of the generated flickering
-		flickering_frequency_ = 100;
 		first_flicker_ = true;
 	}
 
@@ -361,8 +374,8 @@ namespace CombFilter {
 			multiplier = 2;
 		}
 
-		for (int i = 0; i < img_height_/2; i++) {
-			for (int j = 0; j < img_width_/2; j++) {
+		for (int i = startx_; i < startx_ + side_len_; i++) {
+			for (int j = starty_; j < starty_ + side_len_; j++) {
 				// generated events for selected pixel
 				x0_.at<double>(i, j) += multiplier * flickering_polarity_ * contrast_threshold_on_user_defined_;
 				

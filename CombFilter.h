@@ -18,7 +18,16 @@ namespace CombFilter {
 	class combFilter {
 	public:
 
-		combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr);
+		struct flickerInfo {
+
+			bool flicker_gen;
+			int32_t flicker_freq;
+			int32_t startx;
+			int32_t starty;
+			int32_t side_len;
+		};
+
+		combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr, flickerInfo flicker_profile);
 		virtual ~combFilter();
 		void eventsCallback();
 
@@ -104,8 +113,13 @@ namespace CombFilter {
 		bool current_ts_checked_ = 0;
 		int64_t current_ts_ = 0;
 		int flickering_polarity_ = 1; // the on and off of the generated flickering
-		int64_t flickering_frequency_ = 0;
 		bool first_flicker_ = true;
+
+		int32_t flickering_frequency_ = 0;
+		bool flicker_gen_ = false;
+		int32_t startx_;
+		int32_t starty_;
+		int32_t side_len_;
 
 	};
 
