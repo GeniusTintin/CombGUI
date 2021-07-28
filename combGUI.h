@@ -144,12 +144,16 @@ namespace CombGUI {
 			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->button1->BackColor = System::Drawing::SystemColors::MenuHighlight;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->ForeColor = System::Drawing::SystemColors::HighlightText;
 			this->button1->Location = System::Drawing::Point(30, 437);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(391, 30);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Start";
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &combGUI::button1_Click);
 			// 
 			// textBox1
@@ -271,34 +275,40 @@ namespace CombGUI {
 			// button2
 			// 
 			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->button2->BackColor = System::Drawing::Color::Azure;
+			this->button2->ForeColor = System::Drawing::Color::DarkRed;
 			this->button2->Location = System::Drawing::Point(394, 32);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(20, 20);
 			this->button2->TabIndex = 12;
 			this->button2->Text = L"X";
-			this->button2->UseVisualStyleBackColor = true;
+			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &combGUI::button2_Click);
 			// 
 			// button3
 			// 
 			this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->button3->BackColor = System::Drawing::Color::Azure;
+			this->button3->ForeColor = System::Drawing::Color::DarkRed;
 			this->button3->Location = System::Drawing::Point(394, 65);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(20, 20);
 			this->button3->TabIndex = 13;
 			this->button3->Text = L"X";
-			this->button3->UseVisualStyleBackColor = true;
+			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &combGUI::button3_Click);
 			// 
 			// button4
 			// 
 			this->button4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->button4->BackColor = System::Drawing::Color::Azure;
+			this->button4->ForeColor = System::Drawing::Color::DarkRed;
 			this->button4->Location = System::Drawing::Point(230, 124);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(20, 20);
 			this->button4->TabIndex = 14;
 			this->button4->Text = L"X";
-			this->button4->UseVisualStyleBackColor = true;
+			this->button4->UseVisualStyleBackColor = false;
 			this->button4->Click += gcnew System::EventHandler(this, &combGUI::button4_Click);
 			// 
 			// label5
@@ -323,12 +333,14 @@ namespace CombGUI {
 			// button5
 			// 
 			this->button5->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->button5->BackColor = System::Drawing::Color::Azure;
+			this->button5->ForeColor = System::Drawing::Color::DarkRed;
 			this->button5->Location = System::Drawing::Point(230, 156);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(20, 20);
 			this->button5->TabIndex = 17;
 			this->button5->Text = L"X";
-			this->button5->UseVisualStyleBackColor = true;
+			this->button5->UseVisualStyleBackColor = false;
 			this->button5->Click += gcnew System::EventHandler(this, &combGUI::button5_Click);
 			// 
 			// pictureBox1
@@ -364,23 +376,29 @@ namespace CombGUI {
 			// button6
 			// 
 			this->button6->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->button6->BackColor = System::Drawing::Color::Azure;
+			this->button6->ForeColor = System::Drawing::Color::DarkRed;
 			this->button6->Location = System::Drawing::Point(230, 188);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(20, 20);
 			this->button6->TabIndex = 21;
 			this->button6->Text = L"X";
-			this->button6->UseVisualStyleBackColor = true;
+			this->button6->UseVisualStyleBackColor = false;
 			this->button6->Click += gcnew System::EventHandler(this, &combGUI::button6_Click);
 			// 
 			// checkBox2
 			// 
 			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(124, 318);
+			this->checkBox2->BackColor = System::Drawing::Color::DeepSkyBlue;
+			this->checkBox2->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->checkBox2->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->checkBox2->Location = System::Drawing::Point(124, 322);
 			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(116, 17);
+			this->checkBox2->Size = System::Drawing::Size(208, 23);
 			this->checkBox2->TabIndex = 22;
-			this->checkBox2->Text = L"flickering generator";
-			this->checkBox2->UseVisualStyleBackColor = true;
+			this->checkBox2->Text = L"Flickering Generator";
+			this->checkBox2->UseVisualStyleBackColor = false;
 			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &combGUI::checkBox2_CheckedChanged);
 			// 
 			// textBox6
