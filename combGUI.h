@@ -148,9 +148,9 @@ namespace CombGUI {
 			this->button1->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button1->ForeColor = System::Drawing::SystemColors::HighlightText;
-			this->button1->Location = System::Drawing::Point(30, 437);
+			this->button1->Location = System::Drawing::Point(30, 429);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(391, 30);
+			this->button1->Size = System::Drawing::Size(391, 35);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Start";
 			this->button1->UseVisualStyleBackColor = false;
@@ -474,7 +474,7 @@ namespace CombGUI {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::GradientActiveCaption;
-			this->ClientSize = System::Drawing::Size(447, 479);
+			this->ClientSize = System::Drawing::Size(447, 476);
 			this->Controls->Add(this->textBox9);
 			this->Controls->Add(this->label10);
 			this->Controls->Add(this->label9);
