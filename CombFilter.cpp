@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+#include <msclr/marshal_cppstd.h>
 
 namespace CombFilter {
 
@@ -70,10 +71,10 @@ namespace CombFilter {
 
 			int32_t x = -1; // set a marker that will trigger a flickering generator
 			int32_t y = -1;
-			int32_t ts = -1;
+			int64_t ts = -1;
 			int8_t polarity = -1;
 
-
+																									
 		while (!iseof) {
 
 			// setup flickering generator information
@@ -117,7 +118,6 @@ namespace CombFilter {
 					current_ts_ = ts;
 					first_ts_ = false;
 				}
-				
 				
 
 				// grab delay and calculate y0_
@@ -170,17 +170,19 @@ namespace CombFilter {
 					integral_tracking(x, y, ts, polarity, filtering_method_);
 				}
 				else{
+					if (side_len_ >= img_height_ || side_len_ >= img_width_) {
+						System::Windows::Forms::MessageBox::Show("Flickering region out of boundary", "Warning", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+						break;
+					}
 					flickering_generator();
-					current_ts_ += myReaderPtr_->timeResolution_ /((flickering_frequency_ + rand() % (2*noise_range_) - noise_range_ )*2);
-				}
-				
-
-
-				// TODO:
-				// write generated events to file
-				// events 读一个写一个
-
-				
+					if (noise_range_) {
+						current_ts_ += myReaderPtr_->timeResolution_ /((flickering_frequency_ + rand() % (2*noise_range_) - noise_range_ )*2);
+					}
+					else {
+						current_ts_ += myReaderPtr_->timeResolution_ / (flickering_frequency_ * 2);
+					}
+					
+				}	
 
 			}
 		}
@@ -279,6 +281,8 @@ namespace CombFilter {
 	void combFilter::store2buffer(const cv::Mat& figx, const cv::Mat& figy) {
 
 		// buffer index of input and output is the same
+		figx.convertTo(figx, CV_64FC1, 1);
+
 		figx.copyTo(ring_buffer1_[buffer_index_]);
 		figy.copyTo(ring_buffer2_[buffer_index_]);
 
