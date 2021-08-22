@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <cmath>
 #include <msclr/marshal_cppstd.h>
+#include <random>
+#include <chrono>
 
 namespace CombFilter {
 
@@ -85,6 +87,7 @@ namespace CombFilter {
 					if (first_ts_) {
 						current_ts_ = myReaderPtr_->eData_.ts;
 						first_ts_ = false;
+						skipped_ = 0;
 					}
 				}
 				else {
@@ -109,7 +112,7 @@ namespace CombFilter {
 			
 			
 			// travel through all the possible x and y
-			if ((x >= 0 && x < img_width_ && y >= 0 && y < img_height_) || (x==-1 && y==-1)) {
+			if ((x >= 0 && x < img_width_ && y >= 0 && y < img_height_) || (x==-1 || y==-1)) {
 	
 				// if is the first ts, note that down to save it for later flickering genreator reference
 				// current_ts_ is the current flickering time stamp
@@ -176,7 +179,14 @@ namespace CombFilter {
 					}
 					flickering_generator();
 					if (noise_range_) {
-						current_ts_ += myReaderPtr_->timeResolution_ /((flickering_frequency_ + rand() % (2*noise_range_) - noise_range_ )*2);
+						unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+						std::default_random_engine generator(seed);
+						// noise_range/3 (3 * sigma)
+						std::normal_distribution<double> distribution(0.0, noise_range_ / 3);
+						//distribution(generator);
+						//current_ts_ += myReaderPtr_->timeResolution_ /((flickering_frequency_ + rand() % (2*noise_range_) - noise_range_ )*2);
+						current_ts_ += myReaderPtr_->timeResolution_ / ((flickering_frequency_ + distribution(generator)) * 2);
+						
 					}
 					else {
 						current_ts_ += myReaderPtr_->timeResolution_ / (flickering_frequency_ * 2);
