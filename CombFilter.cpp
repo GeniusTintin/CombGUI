@@ -82,7 +82,7 @@ namespace CombFilter {
 			// setup flickering generator information
 
 			if (flicker_gen_) {
-				if (ts > current_ts_ + myReaderPtr_->timeResolution_ / (flickering_frequency_ * 2)) {
+				if (ts > current_ts_  /*+ myReaderPtr_->timeResolution_ / (flickering_frequency_ * 2)*/ ) {
 					skipped_ = 1;
 					if (first_ts_) {
 						current_ts_ = myReaderPtr_->eData_.ts;
@@ -108,6 +108,10 @@ namespace CombFilter {
 				y = myReaderPtr_->eData_.y;
 				ts = myReaderPtr_->eData_.ts;
 				polarity = myReaderPtr_->eData_.polarity;
+
+				current_ts_ = ts;
+
+				
 			}
 			
 			
@@ -117,14 +121,14 @@ namespace CombFilter {
 				// if is the first ts, note that down to save it for later flickering genreator reference
 				// current_ts_ is the current flickering time stamp
 				// first_ts_ is the boolean type that suggest that if it's at the beginning of the event file
-				if (first_ts_ || !flicker_gen_) {
+				if (first_ts_) {
 					current_ts_ = ts;
 					first_ts_ = false;
 				}
 				
 
 				// grab delay and calculate y0_
-				while (current_ts_ >= t_next_store_) {
+				while (current_ts_ > t_next_store_/*|| current_ts_ < ts*/) {
 					if (t_next_store_ == 0) {
 						t_next_store_ = ts;
 					}
