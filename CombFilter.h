@@ -18,6 +18,7 @@ namespace CombFilter {
 	class combFilter {
 	public:
 
+
 		struct flickerInfo {
 
 			bool flicker_gen;
@@ -29,6 +30,7 @@ namespace CombFilter {
 		};
 
 		combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr, flickerInfo flicker_profile);
+
 		virtual ~combFilter();
 		void eventsCallback();
 

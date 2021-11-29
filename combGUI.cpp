@@ -28,6 +28,7 @@ void main(array<System::String^>^ args) {
 	int32_t noise_range = form.noise_range;
 	std::string starting_point = *form.starting_point;
 
+
 	int32_t startx, starty;
 	char c = ',';
 	extract_number_from_string(starting_point, startx, starty, c);

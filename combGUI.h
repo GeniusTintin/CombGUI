@@ -40,6 +40,7 @@ namespace CombGUI {
 		int32_t side_length;
 		int32_t noise_range;
 
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
@@ -49,6 +50,7 @@ namespace CombGUI {
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ textBox5;
 	private: System::Windows::Forms::Button^ button6;
+
 	private: System::Windows::Forms::CheckBox^ checkBox2;
 
 	private: System::Windows::Forms::TextBox^ textBox6;
@@ -59,6 +61,7 @@ namespace CombGUI {
 	private: System::Windows::Forms::Label^ label9;
 	private: System::Windows::Forms::Label^ label10;
 	private: System::Windows::Forms::TextBox^ textBox9;
+
 
 	private: System::Windows::Forms::Button^ button5;
 	public:
@@ -127,6 +130,7 @@ namespace CombGUI {
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+
 			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -136,6 +140,7 @@ namespace CombGUI {
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
+
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -144,6 +149,7 @@ namespace CombGUI {
 			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+
 			this->button1->BackColor = System::Drawing::SystemColors::MenuHighlight;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -151,6 +157,7 @@ namespace CombGUI {
 			this->button1->Location = System::Drawing::Point(30, 429);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(391, 35);
+
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Start";
 			this->button1->UseVisualStyleBackColor = false;
@@ -194,8 +201,10 @@ namespace CombGUI {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(264, 20);
 			this->textBox2->TabIndex = 4;
+
 			this->textBox2->Text = L"C:\\Users\\Tintin\\OneDrive - Australian National University\\ANU_D\\ENGN4200 Individu"
 				L"al Project\\Dataset\\";
+
 			// 
 			// checkBox1
 			// 
@@ -213,7 +222,9 @@ namespace CombGUI {
 			// radioButton1
 			// 
 			this->radioButton1->AutoSize = true;
+
 			this->radioButton1->Location = System::Drawing::Point(124, 236);
+
 			this->radioButton1->Name = L"radioButton1";
 			this->radioButton1->Size = System::Drawing::Size(105, 17);
 			this->radioButton1->TabIndex = 6;
@@ -328,7 +339,7 @@ namespace CombGUI {
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(100, 20);
 			this->textBox4->TabIndex = 16;
-			this->textBox4->Text = L"1000";
+			this->textBox4->Text = L"100";
 			// 
 			// button5
 			// 

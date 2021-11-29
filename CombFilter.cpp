@@ -10,7 +10,9 @@
 
 namespace CombFilter {
 
+
 	combFilter::combFilter(std::string path, std::string filename, double basefreq, int32_t filtering_method, double publish_framerate, double mtr, flickerInfo flicker_profile) {
+
 
 		static FileReader::fileReader eventReader(path, filename);
 		myReaderPtr_ = &eventReader;
@@ -26,6 +28,7 @@ namespace CombFilter {
 		starty_ = flicker_profile.starty;
 		side_len_ = flicker_profile.side_len;
 		noise_range_ = flicker_profile.noise_range;
+
 	}
 
 	combFilter::~combFilter() {
