@@ -202,8 +202,7 @@ namespace CombGUI {
 			this->textBox2->Size = System::Drawing::Size(264, 20);
 			this->textBox2->TabIndex = 4;
 
-			this->textBox2->Text = L"C:\\Users\\Tintin\\OneDrive - Australian National University\\ANU_D\\ENGN4200 Individu"
-				L"al Project\\Dataset\\";
+			this->textBox2->Text = L"C:\\Users\\Tintin\\OneDrive - sjtu.edu.cn\\ANU_D\\ENGN4200 Individual Project\\Dataset\\";
 
 			// 
 			// checkBox1
